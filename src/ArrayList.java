@@ -11,7 +11,7 @@ public class ArrayList {
 
     private static final int INITIAL_LENGTH = 10;
     private int[] list;
-    public int length;
+    public int length; //consider making it private and adding a getter
 
     public ArrayList() {
         createNewList(INITIAL_LENGTH);
@@ -23,7 +23,7 @@ public class ArrayList {
 
     // получение по индексу
     public int get(int index) {
-        if (index >= list.length) {
+        if (index >= list.length) { //what about cases when index < 0
             throw new IndexOutOfBoundsException("There's no such index.");
         }
         return list[index];
@@ -40,14 +40,14 @@ public class ArrayList {
 
     // удаление по индексу
     public void remove(int index) {
-        if (index >= list.length) {
+        if (index >= list.length) { //what about cases when index < 0
             throw new IndexOutOfBoundsException("There's no such index.");
         }
         int[] temp = new int[length - 1];
         for (int i = 0, j = 0; i < length; i++, j++) {
             if (i == index) {
                 j--;
-                continue;
+                continue; //consider using if else insted of continue
             }
             temp[j] = list[i];
         }
@@ -67,7 +67,7 @@ public class ArrayList {
 
     // содержит ли элемент
     public boolean contains(int elem) {
-        return Arrays.binarySearch(list, elem) >= 0;
+        return Arrays.binarySearch(list, elem) >= 0; //test this method and find why it's not working
     }
 
     public void print() {
@@ -82,7 +82,7 @@ public class ArrayList {
     }
 
     private void expandList() {
-        int len = length + (length / 2);
+        int len = length + (length / 2); //what if we create an ArrayList with length 0? try this case
         list = Arrays.copyOf(list, len);
     }
 }
